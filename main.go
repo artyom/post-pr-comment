@@ -20,7 +20,10 @@ func main() {
 	log.SetFlags(0)
 	ctx, cancel := signal.NotifyContext(context.Background(), os.Interrupt)
 	defer cancel()
-	args := runArgs{}
+	args := runArgs{
+		Template:  os.Getenv("TEMPLATE_FILE"),
+		Variables: os.Getenv("VARS_FILE"),
+	}
 	flag.StringVar(&args.Template, "t", args.Template, "path to the template, see: https://pkg.go.dev/text/template")
 	flag.StringVar(&args.Variables, "v", args.Variables, "path to JSON mapping of variables to use in template, see:\nhttps://pkg.go.dev/encoding/json#Unmarshal")
 	flag.Parse()
