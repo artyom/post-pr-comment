@@ -20,6 +20,6 @@ jobs:
       - name: Build, tag, and push
         run: |
           docker build -t image .
-          TAG=$(git rev-parse --short HEAD)
+          TAG=$(git describe --tags)
           docker tag image ghcr.io/artyom/post-pr-comment:$TAG
           docker push ghcr.io/artyom/post-pr-comment:$TAG
