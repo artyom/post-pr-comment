@@ -21,8 +21,8 @@ func main() {
 	ctx, cancel := signal.NotifyContext(context.Background(), os.Interrupt)
 	defer cancel()
 	args := runArgs{
-		Template:  os.Getenv("TEMPLATE_FILE"),
-		Variables: os.Getenv("VARS_FILE"),
+		Template:  os.Getenv("INPUT_TEMPLATE-FILE"),
+		Variables: os.Getenv("INPUT_VARIABLES-FILE"),
 	}
 	flag.StringVar(&args.Template, "t", args.Template, "path to the template, see: https://pkg.go.dev/text/template")
 	flag.StringVar(&args.Variables, "v", args.Variables, "path to JSON mapping of variables to use in template, see:\nhttps://pkg.go.dev/encoding/json#Unmarshal")
@@ -46,6 +46,9 @@ func run(ctx context.Context, args runArgs) error {
 		return errors.New("GITHUB_EVENT_PATH is empty")
 	}
 	githubToken := os.Getenv("GITHUB_TOKEN")
+	if githubToken == "" {
+		githubToken = os.Getenv("INPUT_GITHUB-TOKEN")
+	}
 	if githubToken == "" {
 		return errors.New("GITHUB_TOKEN must be set")
 	}
