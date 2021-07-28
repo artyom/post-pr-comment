@@ -1,0 +1,32 @@
+# https://docs.github.com/en/actions/creating-actions/metadata-syntax-for-github-actions
+name: Comment on a pull request
+description: >
+  Post a comment to a pull request conversation using provided template and
+  variables to fill the template.
+inputs:
+  github-token:
+    required: true
+    description: GitHub token to access API (github.token variable)
+  template-file:
+    required: true
+    description: >
+      Path to the template file, see https://pkg.go.dev/text/template for
+      syntax details.
+  variables-file:
+    required: true
+    description: >
+      Path to the template variables mapping file (JSON).
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  env:
+    GITHUB_TOKEN: ${{ inputs.github-token }}
+  args:
+    - '-t=${{ inputs.template-file }}'
+    - '-v=${{ inputs.variables-file }}'
+
+outputs:
+  comment-id:
+    description: ID of the comment created
+  comment-url:
+    description: URL pointing to the comment created
