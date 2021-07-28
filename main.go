@@ -9,8 +9,8 @@ import (
 	"fmt"
 	"log"
 	"os"
-	"os/signal"
 	"text/template"
+	"time"
 
 	"github.com/google/go-github/v37/github"
 	"golang.org/x/oauth2"
@@ -18,7 +18,7 @@ import (
 
 func main() {
 	log.SetFlags(0)
-	ctx, cancel := signal.NotifyContext(context.Background(), os.Interrupt)
+	ctx, cancel := context.WithTimeout(context.Background(), time.Minute)
 	defer cancel()
 	args := runArgs{
 		Template:  os.Getenv("INPUT_TEMPLATE-FILE"),
