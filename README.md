@@ -17,10 +17,6 @@ This GitHub actions adds a comment on a pull request, using provided template an
 
 ## Example usage
 
-This action can be [used in two ways][uses-doc] — either by referencing this repository, or by referencing a published container image.
-
-### Referencing a public repository
-
 ```yaml
 steps:
   - uses: actions/checkout@v2
@@ -31,9 +27,7 @@ steps:
       variables-file: vars.json
 ```
 
-When you use it this way, on each run GitHub runner will rebuild an image before running it, which may take a while.
-
-### Referencing a published image
+Alternatively, you [reference use a published docker image][uses-doc] directly:
 
 ```yaml
 steps:
@@ -44,8 +38,6 @@ steps:
       template-file: template.txt
       variables-file: vars.json
 ```
-
-When referencing a pre-built docker image, GitHub runner will pull it and run, which is usually faster than rebuilding an image on demand.
 
 ### Template example
 

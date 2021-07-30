@@ -18,7 +18,7 @@ inputs:
       Path to the template variables mapping file (JSON).
 runs:
   using: 'docker'
-  image: 'Dockerfile'
+  image: 'docker://ghcr.io/artyom/post-pr-comment:v1'
   env:
     GITHUB_TOKEN: ${{ inputs.github-token }}
   args:
