@@ -6,7 +6,8 @@ description: >
 inputs:
   github-token:
     required: true
-    description: GitHub token to access API (github.token variable)
+    description: GitHub token to access API (defaults to github.token)
+    github-token: ${{ github.token }}
   template-file:
     required: true
     description: >
