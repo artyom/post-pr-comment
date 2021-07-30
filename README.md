@@ -27,18 +27,6 @@ steps:
       variables-file: vars.json
 ```
 
-Alternatively, you [reference use a published docker image][uses-doc] directly:
-
-```yaml
-steps:
-  - uses: actions/checkout@v2
-  - uses: docker://ghcr.io/artyom/post-pr-comment:v1
-    with:
-      github-token: ${{ github.token }}
-      template-file: template.txt
-      variables-file: vars.json
-```
-
 ### Template example
 
 Template file like this:
@@ -73,5 +61,3 @@ Here's your list of animals:
 ```
 
 You can experiment with rendering in the playground: <https://play.golang.org/p/TOl7HrQHnVT>
-
-[uses-doc]: https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idstepsuses
